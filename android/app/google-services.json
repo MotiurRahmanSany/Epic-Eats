@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "291351940657",
+    "project_id": "epic-eats-food-delivery-app",
+    "storage_bucket": "epic-eats-food-delivery-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291351940657:android:96cd580997513ea9560f10",
+        "android_client_info": {
+          "package_name": "com.example.epic_eats"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDBI4S4tD1orP44zRJYH2lL1kW9s_g71w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
