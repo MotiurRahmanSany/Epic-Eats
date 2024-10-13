@@ -2,13 +2,13 @@ import 'package:epic_eats/providers/cart_provider.dart';
 import 'package:epic_eats/providers/food_provider.dart';
 import 'package:epic_eats/providers/selected_tab_provider.dart';
 import 'package:epic_eats/screens/food_details_screen.dart';
-import 'package:epic_eats/utils/category_enum.dart';
 import 'package:epic_eats/components/my_food_tile.dart';
 import 'package:epic_eats/components/my_sliver_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/my_drawer.dart';
+import '../models/food.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -58,7 +58,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               final foodList = ref.watch(filteredFoodProvider(category));
               if (foodList.isEmpty) {
                 return const Center(
-                  child: Text('No Items available in this categry'),
+                  child: Text('No Items available in this category'),
                 );
               }
               return ListView.builder(

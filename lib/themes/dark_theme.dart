@@ -7,5 +7,7 @@ final darkTheme = ThemeData(
   // ),
   brightness: Brightness.dark,
   colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.white, brightness: Brightness.dark),
+    seedColor: Colors.orangeAccent,
+    brightness: Brightness.dark,
+  ),
 );

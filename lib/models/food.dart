@@ -1,14 +1,24 @@
-import 'dart:convert';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
 
-import '../utils/category_enum.dart';
+part 'food.g.dart';
 
-class Food {
+@HiveType(typeId: 0)
+class Food extends HiveObject {
+  @HiveField(0)
   final String name;
+  @HiveField(1)
   final String description;
+  @HiveField(2)
   final double price;
+  @HiveField(3)
   final String image;
+  @HiveField(4)
   final double rating;
+  @HiveField(5)
   final Category category;
+  @HiveField(6)
   final List<Addon> addons;
 
   Food({
@@ -50,14 +60,27 @@ class Food {
     );
   }
 
-  String toJson() => json.encode(toMap());
 
-  factory Food.fromJson(String source) =>
-      Food.fromMap(json.decode(source) as Map<String, dynamic>);
+  // Equality based on name only
+  @override
+  bool operator ==(covariant Food other) {
+    if (identical(this, other)) return true;
+
+    return other.name == name;
+  }
+
+  @override
+  int get hashCode => name.hashCode;
 }
 
-class Addon {
+
+
+
+@HiveType(typeId: 1)
+class Addon extends HiveObject {
+  @HiveField(0)
   final String name;
+  @HiveField(1)
   final double price;
   Addon({
     required this.name,
@@ -78,8 +101,26 @@ class Addon {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory Addon.fromJson(String source) =>
-      Addon.fromMap(json.decode(source) as Map<String, dynamic>);
 }
+
+@HiveType(typeId: 2)
+enum Category {
+  @HiveField(0)
+  burger,
+  @HiveField(1)
+  pizza,
+  @HiveField(2)
+  pasta,
+  @HiveField(3)
+  salad,
+  @HiveField(4)
+  sides,
+  @HiveField(5)
+  desserts,
+  @HiveField(6)
+  drinks,
+  @HiveField(7)
+  shushi
+}
+
+int get categoryLength => Category.values.length;

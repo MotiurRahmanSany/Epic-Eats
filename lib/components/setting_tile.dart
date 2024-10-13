@@ -15,10 +15,13 @@ class SettingTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Card(
-        child: ListTile(
-          title: Text(title),
-          leading: Icon(icon),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Card(
+          child: ListTile(
+            title: Text(title),
+            leading: Icon(icon),
+          ),
         ),
       ),
     );

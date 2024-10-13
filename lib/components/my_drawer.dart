@@ -44,6 +44,14 @@ class MyDrawer extends ConsumerWidget {
                   ],
                 )),
               ),
+               DrawerTile(
+                title: 'My Profile',
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/profile');
+                },
+                icon: Icons.person_outline,
+              ),
               DrawerTile(
                 title: 'Favorites',
                 onTap: () {

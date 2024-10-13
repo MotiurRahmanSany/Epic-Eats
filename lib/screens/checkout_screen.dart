@@ -1,6 +1,8 @@
 import 'package:epic_eats/components/pay_now.dart';
+import 'package:epic_eats/providers/location_provider.dart';
 import 'package:epic_eats/providers/order_history_provider.dart';
-import 'package:epic_eats/screens/delivery_progress_screen.dart';
+import 'package:epic_eats/providers/track_order_provider.dart';
+import 'package:epic_eats/screens/order_confirmed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,15 +34,19 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
             return PayNow(
               onConfirm: () {
                 Navigator.of(context).pop();
+                //! setting track order to true
+                ref.read(trackOrderProvider.notifier).state = true;
+
                 ref.read(orderHistoryProvider.notifier).createOrder(
-                  ref.read(cartStateProvider),
-                  ref.read(cartStateProvider.notifier).totalPrice
-                );
+                    items: ref.read(cartStateProvider),
+                    totalAmount: ref.read(cartStateProvider.notifier).totalPrice,
+                    userLocation: ref.read(locationProvider),
+                    );
                 ref.read(cartStateProvider.notifier).clearCart();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const DeliveryProgressScreen(),
+                    builder: (context) => const OrderConfirmedScreen(),
                   ),
                 );
               },
@@ -52,6 +58,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                   .watch(cartStateProvider.notifier)
                   .totalPrice
                   .toStringAsFixed(2),
+              userLocation: ref.watch(locationProvider),
             );
           });
     }

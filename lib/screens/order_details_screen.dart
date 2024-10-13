@@ -33,6 +33,10 @@ class OrderDetailsScreen extends ConsumerWidget {
               'Order ID: #${order.id}',
               style: const TextStyle(fontSize: 12),
             ),
+             Text(
+              'Order from: ${order.userLocation}',
+              style: const TextStyle(fontSize: 12),
+            ),
             const SizedBox(height: 10),
             Text(
               'Total Amount: \$${order.totalAmount.toStringAsFixed(2)}',

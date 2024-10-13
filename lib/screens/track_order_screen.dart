@@ -1,26 +1,31 @@
+import 'package:epic_eats/providers/track_order_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TrackOrderScreen extends StatelessWidget {
+class TrackOrderScreen extends ConsumerWidget {
   const TrackOrderScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Track Order'),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: const Center(
-        child: Text('You have no pending orders'),
-      ),
-    );
+        body: ref.watch(trackOrderProvider)
+            ? const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // add estimated time here
+                    Text('Estimated time for delivery: '),
+                    // put stepper here
+                    // put animations here
+                  ],
+                ),
+              )
+            : const Center(
+                child: Text(
+                  'You have no orders pending right now! Go place an order!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+              ));
   }
 }

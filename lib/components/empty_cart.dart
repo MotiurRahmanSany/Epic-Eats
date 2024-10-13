@@ -26,7 +26,7 @@ class EmptyCart extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
             onPressed: () {
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushReplacementNamed(context, '/home');
             },
             label: const Text(
               'Order Smiles',

@@ -1,8 +1,15 @@
 import 'package:epic_eats/models/food.dart';
+import 'package:hive/hive.dart';
 
-class CartItem {
+part 'cart_item.g.dart';
+
+@HiveType(typeId: 3)
+class CartItem extends HiveObject {
+  @HiveField(0)
   Food food;
+  @HiveField(1)
   int quantity;
+  @HiveField(2)
   List<Addon> selectedAddons;
 
   CartItem({
@@ -12,5 +19,6 @@ class CartItem {
   });
 
   double get totalPrice =>
-      (food.price + selectedAddons.fold(0, (sum, addon) => sum + addon.price)) * quantity;
+      (food.price + selectedAddons.fold(0, (sum, addon) => sum + addon.price)) *
+      quantity;
 }

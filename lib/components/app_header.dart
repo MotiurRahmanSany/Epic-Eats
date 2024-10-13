@@ -2,8 +2,8 @@ import 'package:epic_eats/components/search_food_box.dart';
 import 'package:epic_eats/components/delivery_location_search_box.dart';
 import 'package:flutter/material.dart';
 
-class HeaderDeliveryInfo extends StatelessWidget {
-  const HeaderDeliveryInfo({super.key});
+class AppHeader extends StatelessWidget {
+  const AppHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

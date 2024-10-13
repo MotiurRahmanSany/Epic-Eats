@@ -2,8 +2,8 @@ import 'package:epic_eats/providers/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DeliverSearchBox extends ConsumerWidget {
-  DeliverSearchBox({super.key});
+class DeliveryLocationSearchBox extends ConsumerWidget {
+  DeliveryLocationSearchBox({super.key});
   final _locationController = TextEditingController();
   void openSearchBox(context, WidgetRef ref) {
     showDialog(

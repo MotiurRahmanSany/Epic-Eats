@@ -1,8 +1,8 @@
-import 'package:epic_eats/components/header_delivery_info.dart';
+import 'package:epic_eats/components/app_header.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 
-import '../utils/category_enum.dart';
+import '../models/food.dart';
 
 class MySliverAppBar extends StatelessWidget {
   final Function(int) onTabChange;
@@ -54,7 +54,7 @@ class MySliverAppBar extends StatelessWidget {
       ],
       flexibleSpace: const FlexibleSpaceBar(
         centerTitle: true,
-        background: HeaderDeliveryInfo(),
+        background: AppHeader(),
       ),
       bottom: TabBar(
         controller: tabController,

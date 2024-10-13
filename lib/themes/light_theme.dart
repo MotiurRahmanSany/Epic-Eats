@@ -7,7 +7,7 @@ final lightTheme = ThemeData(
   // ),
   brightness: Brightness.light,
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.white,
+    seedColor: Colors.orangeAccent,
     brightness: Brightness.light,
   ),
 );

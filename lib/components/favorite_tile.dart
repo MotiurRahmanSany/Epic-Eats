@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/food.dart';
+import '../screens/food_details_screen.dart';
 
 class FavoriteTile extends StatelessWidget {
   const FavoriteTile({
@@ -11,12 +12,18 @@ class FavoriteTile extends StatelessWidget {
   final Food food;
   final void Function() onTap;
 
+  void goToDetails(BuildContext context) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => FoodDetailsScreen(food: food)));
+    }
   @override
   Widget build(BuildContext context) {
+    
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Card(
         child: ListTile(
+          onTap: () => goToDetails(context),
           leading: SizedBox(
             height: 100,
             width: 100,

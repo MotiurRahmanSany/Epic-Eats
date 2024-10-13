@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:epic_eats/components/setting_tile.dart';
 import 'package:epic_eats/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +20,13 @@ class SettingsScreen extends ConsumerWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-
       ),
       body: Column(
         children: [
           SettingTile(
-            title: 'Toggle App Theme',
+            title: 'Switch theme',
             icon: Icons.brightness_6_outlined,
             onTap: () {
-              log('theme changed callled!!');
               ref.read(themeProvider.notifier).toggleTheme();
             },
           ),

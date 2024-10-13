@@ -9,6 +9,7 @@ class PayNow extends StatelessWidget {
     required this.cardHolderName,
     required this.cvvCode,
     required this.totalAmount,
+    required this.userLocation,
   });
 
   final void Function() onConfirm;
@@ -17,6 +18,7 @@ class PayNow extends StatelessWidget {
   final String cardHolderName;
   final String cvvCode;
   final String totalAmount;
+  final String userLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class PayNow extends StatelessWidget {
               fontSize: 15.0,
             ),
           ),
+          Text('Food will be delivered to: $userLocation'),
           const Text(
             'Pay Now and Confirm order? ',
             style: TextStyle(

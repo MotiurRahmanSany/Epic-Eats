@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../utils/food_warehouse.dart';
 import '../models/food.dart';
-import '../utils/category_enum.dart';
 
 // final foodItemsProvider = Provider<List<Food>>((ref) {
 //   // return foodWarehouse.map((food) => Food.fromMap(food)).toList();
