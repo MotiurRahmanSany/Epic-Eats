@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../utils/food_warehouse.dart';
 import '../models/food.dart';
 
-// final foodItemsProvider = Provider<List<Food>>((ref) {
+// final foodDatabaseProvider = Provider<List<Food>>((ref) {
 //   // return foodWarehouse.map((food) => Food.fromMap(food)).toList();
 
 // });
-final foodItemsProvider = Provider<List<Food>>((ref) {
+final foodDatabaseProvider = Provider<List<Food>>((ref) {
   return foodWarehouse.expand((food) {
     Category category = Category.values.firstWhere(
       (foodItem) => foodItem.toString() == 'Category.${food['category']}',
@@ -26,7 +26,7 @@ final foodItemsProvider = Provider<List<Food>>((ref) {
 
 final filteredFoodProvider =
     StateProvider.family<List<Food>, Category>((ref, category) {
-  final allFoodItems = ref.watch(foodItemsProvider);
+  final foodDatabase = ref.watch(foodDatabaseProvider);
 
-  return allFoodItems.where((food) => food.category == category).toList();
+  return foodDatabase.where((food) => food.category == category).toList();
 });

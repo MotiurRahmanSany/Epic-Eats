@@ -1,6 +1,7 @@
+import 'package:epic_eats/core/constants/hive_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive/hive.dart';
 
 import '../themes/dark_theme.dart';
 import '../themes/light_theme.dart';
@@ -11,28 +12,27 @@ final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeData>(
 
 class ThemeNotifier extends StateNotifier<ThemeData> {
   ThemeNotifier() : super(lightTheme) {
-    _loadTheme();
+    _loadThemeFromDB();
   }
 
   void toggleTheme() {
     if (state.brightness == Brightness.light) {
       state = darkTheme;
-      _saveTheme('dark');
+      _saveThemeToDB('dark');
     } else {
       state = lightTheme;
-      _saveTheme('light');
+      _saveThemeToDB('light');
     }
-    debugPrint('theme changed now to: ${state.brightness} and also saved');
   }
 
-  void _loadTheme() async {
-    final prefs = await SharedPreferences.getInstance();
-    final theme = prefs.getString('theme') ?? 'light';
+  final themeBox = Hive.box<String>(HiveConstants.prefBoxName);
+
+  void _loadThemeFromDB() async {
+    final theme = themeBox.get(HiveConstants.themeKey, defaultValue: 'light');
     state = theme == 'light' ? lightTheme : darkTheme;
   }
 
-  void _saveTheme(String theme) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('theme', theme);
+  void _saveThemeToDB(String theme) async {
+    themeBox.put(HiveConstants.themeKey, theme);
   }
 }

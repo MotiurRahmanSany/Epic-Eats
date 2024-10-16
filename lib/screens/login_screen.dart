@@ -5,30 +5,13 @@ import 'package:epic_eats/components/my_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../services/auth/auth_service.dart';
 
 class LoginScreen extends ConsumerWidget {
   LoginScreen({super.key});
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void signIn(BuildContext context) async {
-    final authService = AuthService();
-
-    try {
-      await authService.signUserIn(
-          emailController.text, passwordController.text);
-    } catch (err) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(err.toString()),
-          );
-        },
-      );
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -48,7 +31,7 @@ class LoginScreen extends ConsumerWidget {
             MyTextfield(controller: passwordController, hintText: 'Password'),
             const SizedBox(height: 15),
             MyButton(
-              onTap: () => signIn(context),
+              onTap: () {},
               buttonText: 'Login',
             ),
             Row(

@@ -12,9 +12,9 @@ import 'package:epic_eats/screens/login_screen.dart';
 import 'package:epic_eats/screens/order_history_screen.dart';
 import 'package:epic_eats/screens/profile_screen.dart';
 import 'package:epic_eats/screens/register_screen.dart';
+import 'package:epic_eats/screens/search_food_screen.dart';
 import 'package:epic_eats/screens/settings_screen.dart';
 import 'package:epic_eats/screens/track_order_screen.dart';
-import 'package:epic_eats/services/auth/auth_gate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -45,6 +45,7 @@ void main() async {
   await Hive.openBox<CartItem>(HiveConstants.cartBoxName);
   await Hive.openBox<Food>(HiveConstants.favBoxName);
   await Hive.openBox<Order>(HiveConstants.orderHistoryBoxName);
+  await Hive.openBox<String>(HiveConstants.prefBoxName);
 
   runApp(
     const ProviderScope(
@@ -61,7 +62,7 @@ class MyApp extends ConsumerWidget {
     final theme = ref.watch(themeProvider);
     return MaterialApp(
       theme: theme,
-      home: const AuthGate(),
+      home: const LoginRegisterScreen(),
       routes: {
         '/login_register': (context) => const LoginRegisterScreen(),
         '/home': (context) => const HomeScreen(),
@@ -74,6 +75,7 @@ class MyApp extends ConsumerWidget {
         '/login': (context) => LoginScreen(),
         '/order_history': (conetxt) => const OrderHistoryScreen(),
         '/track_order': (context) => const TrackOrderScreen(),
+        '/search' : (context) => const SearchFoodScreen(),
       },
     );
   }

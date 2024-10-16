@@ -8,12 +8,11 @@ class MySliverAppBar extends StatelessWidget {
   final Function(int) onTabChange;
   final TabController tabController;
   final int cartLength;
-  const MySliverAppBar({
-    super.key,
-    required this.onTabChange,
-    required this.tabController,
-    required this.cartLength
-  });
+  const MySliverAppBar(
+      {super.key,
+      required this.onTabChange,
+      required this.tabController,
+      required this.cartLength});
 
   List<Tab> _buildCategoryTabs() {
     return Category.values.map((cat) {
@@ -30,17 +29,27 @@ class MySliverAppBar extends StatelessWidget {
     return SliverAppBar(
       floating: true,
       snap: true,
-      expandedHeight: 300,
+      expandedHeight: 200,
       pinned: true,
-      title: const Text('Sunset Dinner'),
+      title: const Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.restaurant_menu),
+          SizedBox(width: 8),
+          Text('Epic Eats'),
+        ],
+      ),
       centerTitle: true,
       // leading: IconButton(
       //   icon: const Icon(Icons.menu),
       //   onPressed: () {
-          
+
       //   },
       // ),
       actions: [
+        IconButton(onPressed: (){
+          Navigator.of(context).pushNamed('/search');
+        }, icon: Icon(Icons.search_outlined,),),
         IconButton(
           icon: badges.Badge(
             badgeContent: Text('$cartLength'),

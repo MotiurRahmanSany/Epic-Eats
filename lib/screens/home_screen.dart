@@ -39,47 +39,54 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     return DefaultTabController(
       length: categoryLength,
       child: Scaffold(
-        drawer: const MyDrawer(),
-        body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              MySliverAppBar(
-                onTabChange: (index) {
-                  ref.read(selectedTabProvider.notifier).state = index;
-                },
-                tabController: _tabController,
-                cartLength: ref.watch(cartStateProvider).length,
-              ),
-            ];
-          },
-          body: TabBarView(
-            controller: _tabController,
-            children: Category.values.map((category) {
-              final foodList = ref.watch(filteredFoodProvider(category));
-              if (foodList.isEmpty) {
-                return const Center(
-                  child: Text('No Items available in this category'),
-                );
-              }
-              return ListView.builder(
-                itemCount: foodList.length,
-                itemBuilder: (context, index) {
-                  final food = foodList[index];
-                  return MyFoodTile(
-                    food: food,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return FoodDetailsScreen(food: food);
-                      }),
-                    ),
-                  );
-                },
-              );
-            }).toList(),
-          ),
-        ),
-      ),
+          drawer: const MyDrawer(),
+          body: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [    
+                MySliverAppBar(
+                  onTabChange: (index) {
+                    ref.read(selectedTabProvider.notifier).state = index;
+                  },
+                  tabController: _tabController,
+                  cartLength: ref.watch(cartStateProvider).length,
+                ),
+              ];
+            },
+            body: Column(
+              children: [
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: Category.values.map((category) {
+                      final foodList =
+                          ref.watch(filteredFoodProvider(category));
+                      if (foodList.isEmpty) {
+                        return const Center(
+                          child:
+                              Text('No Items available in this category'),
+                        );
+                      }
+                      return ListView.builder(
+                        itemCount: foodList.length,
+                        itemBuilder: (context, index) {
+                          final food = foodList[index];
+                          return MyFoodTile(
+                            food: food,
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return FoodDetailsScreen(food: food);
+                              }),
+                            ),
+                          );
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 }

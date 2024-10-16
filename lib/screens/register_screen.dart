@@ -1,5 +1,4 @@
 import 'package:epic_eats/components/my_button.dart';
-import 'package:epic_eats/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,34 +11,7 @@ class RegisterScreen extends ConsumerWidget {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  void signUp(BuildContext context) async {
-    final authService = AuthService();
-
-    if (passwordController.text == confirmPasswordController.text) {
-      try {
-        await authService.signUserUp(
-            emailController.text, passwordController.text);
-      } catch (err) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(err.toString()),
-            );
-          },
-        );
-      }
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return const AlertDialog(
-            title: Text('Password didn\'t match'),
-          );
-        },
-      );
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -70,7 +42,7 @@ class RegisterScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 15),
             MyButton(
-              onTap: () => signUp(context),
+              onTap: () {},
               buttonText: 'Register',
             ),
             Row(

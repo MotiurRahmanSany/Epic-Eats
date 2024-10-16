@@ -1,4 +1,3 @@
-import 'package:epic_eats/components/search_food_box.dart';
 import 'package:epic_eats/components/delivery_location_search_box.dart';
 import 'package:flutter/material.dart';
 
@@ -14,15 +13,16 @@ class AppHeader extends StatelessWidget {
         child: Column(
           children: [
             Divider(
-              color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(.2),
-              // thickness: 2,
+              color: Theme.of(context)
+                  .colorScheme
+                  .onSurfaceVariant
+                  .withOpacity(.2),
               endIndent: 0,
               indent: 0,
             ),
             const SizedBox(height: 20),
-            DeliveryLocationSearchBox(), 
-            const SizedBox(height: 20),
-            const SearchFoodBox(),
+            DeliveryLocationSearchBox(),
+            
           ],
         ),
       ),
