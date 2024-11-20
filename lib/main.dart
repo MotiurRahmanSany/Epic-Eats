@@ -2,6 +2,7 @@ import 'package:epic_eats/core/constants/hive_constants.dart';
 import 'package:epic_eats/models/cart_item.dart';
 import 'package:epic_eats/models/food.dart';
 import 'package:epic_eats/models/order.dart';
+import 'package:epic_eats/providers/login_reg_providers.dart';
 import 'package:epic_eats/providers/theme_provider.dart';
 import 'package:epic_eats/screens/cart_screen.dart';
 import 'package:epic_eats/screens/checkout_screen.dart';
@@ -15,6 +16,7 @@ import 'package:epic_eats/screens/register_screen.dart';
 import 'package:epic_eats/screens/search_food_screen.dart';
 import 'package:epic_eats/screens/settings_screen.dart';
 import 'package:epic_eats/screens/track_order_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -60,9 +62,27 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeProvider);
+    final hasJustRegistered = ref.watch(hasJustRegisteredProvider);
+
     return MaterialApp(
       theme: theme,
-      home: const LoginRegisterScreen(),
+      home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else if (snapshot.data != null && !hasJustRegistered) {
+              return const HomeScreen();
+            } else if (hasJustRegistered) {
+              return LoginScreen();
+            } else {
+              return const LoginRegisterScreen();
+            }
+          }),
       routes: {
         '/login_register': (context) => const LoginRegisterScreen(),
         '/home': (context) => const HomeScreen(),
@@ -75,7 +95,7 @@ class MyApp extends ConsumerWidget {
         '/login': (context) => LoginScreen(),
         '/order_history': (conetxt) => const OrderHistoryScreen(),
         '/track_order': (context) => const TrackOrderScreen(),
-        '/search' : (context) => const SearchFoodScreen(),
+        '/search': (context) => const SearchFoodScreen(),
       },
     );
   }

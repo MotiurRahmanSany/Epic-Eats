@@ -1,8 +1,9 @@
 import 'package:epic_eats/components/my_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/screen_provider.dart';
+import '../providers/login_reg_providers.dart';
 import '../components/my_textfield.dart';
 
 class RegisterScreen extends ConsumerWidget {
@@ -11,7 +12,67 @@ class RegisterScreen extends ConsumerWidget {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  
+  void _showSuccessDialog(BuildContext context, String message, WidgetRef ref) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Ok'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> createUserWithEmailAndPassword(
+      BuildContext context, WidgetRef ref) async {
+    if (passwordController.text.trim() !=
+        confirmPasswordController.text.trim()) {
+      _showErrorDialog(context, 'Passwords do not matched');
+      return;
+    }
+    try {
+      final userCred =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      ref.read(hasJustRegisteredProvider.notifier).state = true;
+      ref.read(screensIndexProvider.notifier).state = 0;
+      emailController.clear();
+      passwordController.clear();
+      confirmPasswordController.clear();
+      _showSuccessDialog(
+          context, 'You have successfully registered, please login now', ref);
+
+      print(userCred);
+    } on FirebaseAuthException catch (err) {
+      _showErrorDialog(context, err.message ?? 'An error occurred');
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,15 +95,19 @@ class RegisterScreen extends ConsumerWidget {
             MyTextfield(
               controller: passwordController,
               hintText: 'Password',
+              obscureText: true,
             ),
             const SizedBox(height: 8),
             MyTextfield(
               controller: confirmPasswordController,
               hintText: 'Confirm Password',
+              obscureText: true,
             ),
             const SizedBox(height: 15),
             MyButton(
-              onTap: () {},
+              onTap: () async {
+                await createUserWithEmailAndPassword(context, ref);
+              },
               buttonText: 'Register',
             ),
             Row(

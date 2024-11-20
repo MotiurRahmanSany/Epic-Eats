@@ -1,4 +1,4 @@
-import 'package:epic_eats/providers/screen_provider.dart';
+import 'package:epic_eats/providers/login_reg_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -6,7 +6,7 @@ import 'package:hive/hive.dart';
 import '../core/constants/hive_constants.dart';
 import '../models/food.dart';
 
-final cartStateProvider =
+final cartStateProvider = 
     StateNotifierProvider<CartNotifier, List<CartItem>>((ref) {
   return CartNotifier();
 });

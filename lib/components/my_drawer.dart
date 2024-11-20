@@ -1,13 +1,16 @@
 import 'package:epic_eats/components/drawer_tile.dart';
 import 'package:epic_eats/providers/favorite_provider.dart';
 import 'package:epic_eats/providers/order_history_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyDrawer extends ConsumerWidget {
   const MyDrawer({super.key});
 
-  
+  void logOutUser(BuildContext context) {
+    FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -89,7 +92,7 @@ class MyDrawer extends ConsumerWidget {
               title: 'Logout',
               onTap: () {
                 Navigator.pop(context);
-                // logUserOut();
+                logOutUser(context);
               },
               icon: Icons.logout,
             ),
