@@ -1,13 +1,14 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/food.dart';
 
-final addonState = StateNotifierProvider<AddonNotifier, List<Addon>>((ref) {
-  return AddonNotifier();
-});
+part 'addon_provider.g.dart';
 
-class AddonNotifier extends StateNotifier<List<Addon>> {
-  AddonNotifier() : super([]);
+
+@riverpod
+class AddonNotifier extends _$AddonNotifier {
+  @override
+  List<Addon> build() => [];
 
   void toggleAddon(Addon addon) {
     if (state.contains(addon)) {

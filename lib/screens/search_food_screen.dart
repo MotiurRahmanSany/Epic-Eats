@@ -33,7 +33,7 @@ class _SearchFoodScreenState extends ConsumerState<SearchFoodScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final searchFoodResults = ref.watch(searchFoodProvider);
+    final searchFoodResults = ref.watch(searchFoodNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -75,7 +75,7 @@ class _SearchFoodScreenState extends ConsumerState<SearchFoodScreen> {
                     filled: true,
                   ),
                   onChanged: (query) {
-                    ref.read(searchFoodProvider.notifier).searchFood(query);
+                    ref.read(searchFoodNotifierProvider.notifier).searchFood(query);
                   },
                 ),
               ),

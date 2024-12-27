@@ -1,19 +1,20 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 import '../core/constants/hive_constants.dart';
 import '../models/cart_item.dart';
 import '../models/order.dart';
 
-final orderHistoryProvider =
-    StateNotifierProvider<OrderHistoryNotifier, List<Order>>((ref) {
-  return OrderHistoryNotifier();
-});
+part 'order_history_provider.g.dart';
 
-class OrderHistoryNotifier extends StateNotifier<List<Order>> {
-  OrderHistoryNotifier() : super([]) {
+@riverpod 
+class OrderHistoryNotifier extends _$OrderHistoryNotifier {
+
+  @override 
+  List<Order> build(){
     _loadOrderHistoryFromDB();
+    return [];
   }
 
   static const _uuid = Uuid();

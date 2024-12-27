@@ -1,5 +1,12 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'location_provider.g.dart';
 
-final locationProvider = StateProvider<String>(
-  (ref) => 'Boalia, Rajshahi'
-);
+@riverpod
+class LocationNotifier extends _$LocationNotifier {
+  @override
+  String build() => 'Boalia, Rajshahi';
+
+  void setLocation(String location){
+    state = location;
+  }
+}

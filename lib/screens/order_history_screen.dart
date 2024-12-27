@@ -24,7 +24,7 @@ class OrderHistoryScreen extends ConsumerWidget {
           ),
           TextButton(
             onPressed: () {
-              ref.read(orderHistoryProvider.notifier).clearOrderHistory();
+              ref.read(orderHistoryNotifierProvider.notifier).clearOrderHistory();
               Navigator.of(context).pop();
             },
             child: const Text('Yes'),
@@ -36,7 +36,7 @@ class OrderHistoryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final orderHistory = ref.watch(orderHistoryProvider);
+    final orderHistory = ref.watch(orderHistoryNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -82,7 +82,7 @@ class OrderHistoryScreen extends ConsumerWidget {
                     ),
                   ),
                   onDismissed: (direction) {
-                    ref.read(orderHistoryProvider.notifier).removeOrder(order);
+                    ref.read(orderHistoryNotifierProvider.notifier).removeOrder(order);
                   },
                   child: OrderHistoryTile(
                     order: order,

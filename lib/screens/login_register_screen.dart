@@ -9,6 +9,6 @@ class LoginRegisterScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final screens = ref.watch(screensProvider);
 
-    return screens[ref.watch(screensIndexProvider)];
+    return screens[ref.watch(screenIndexProvider)];
   }
 }

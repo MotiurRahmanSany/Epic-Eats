@@ -1,5 +1,5 @@
 import 'package:epic_eats/components/setting_tile.dart';
-import 'package:epic_eats/providers/theme_provider.dart';
+import 'package:epic_eats/config/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,7 +27,7 @@ class SettingsScreen extends ConsumerWidget {
             title: 'Switch theme',
             icon: Icons.brightness_6_outlined,
             onTap: () {
-              ref.read(themeProvider.notifier).toggleTheme();
+              ref.read(themeNotifierProvider.notifier).toggleTheme();
             },
           ),
         ],

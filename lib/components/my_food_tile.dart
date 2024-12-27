@@ -15,7 +15,7 @@ class MyFoodTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final favoriteFoods = ref.watch(favoriteFoodProvider);
+    final favoriteFoods = ref.watch(favoriteFoodNotifierProvider);
 
     return Card(
       color: Theme.of(context).colorScheme.surface.withOpacity(.55),

@@ -1,19 +1,22 @@
 import 'package:collection/collection.dart';
 import 'package:epic_eats/models/cart_item.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../core/constants/hive_constants.dart';
 import '../models/food.dart';
 
-final cartStateProvider = 
-    StateNotifierProvider<CartNotifier, List<CartItem>>((ref) {
-  return CartNotifier();
-});
+part 'cart_provider.g.dart';
 
-class CartNotifier extends StateNotifier<List<CartItem>> {
-  CartNotifier() : super([]) {
+
+
+@riverpod 
+class CartNotifier extends _$CartNotifier {
+
+  @override
+  List<CartItem> build() {
     _loadCartFromDB();
+    return [];
   }
   final cartBox = Hive.box<CartItem>(HiveConstants.cartBoxName);
 

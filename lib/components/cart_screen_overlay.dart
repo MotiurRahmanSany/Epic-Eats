@@ -10,8 +10,8 @@ class CartScreenOverlay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cartProvider = ref.watch(cartStateProvider);
-    final cartNotifier = ref.read(cartStateProvider.notifier);
+    final cartProvider = ref.watch(cartNotifierProvider);
+    final cartNotifier = ref.read(cartNotifierProvider.notifier);
 
     return Container(
       decoration: BoxDecoration(

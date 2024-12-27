@@ -23,8 +23,9 @@ class DeliveryLocationSearchBox extends ConsumerWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                ref.read(locationProvider.notifier).state =
-                    _locationController.text;
+                ref
+                    .read(locationNotifierProvider.notifier)
+                    .setLocation(_locationController.text.trim());
               },
               child: const Text('Pick'),
             ),
@@ -36,7 +37,7 @@ class DeliveryLocationSearchBox extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentLocation = ref.watch(locationProvider);
+    final currentLocation = ref.watch(locationNotifierProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

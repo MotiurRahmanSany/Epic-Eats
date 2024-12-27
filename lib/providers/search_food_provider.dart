@@ -1,26 +1,25 @@
 import 'package:epic_eats/models/food.dart';
 import 'package:epic_eats/providers/food_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final searchFoodProvider =
-    StateNotifierProvider<SearchFoodNotifier, List<Food>>((ref) {
-  return SearchFoodNotifier(ref.read(foodDatabaseProvider));
-});
+part 'search_food_provider.g.dart';
 
-class SearchFoodNotifier extends StateNotifier<List<Food>> {
-  final List<Food> foodDatabase;
-
-  SearchFoodNotifier(this.foodDatabase) : super([]);
+@riverpod
+class SearchFoodNotifier extends _$SearchFoodNotifier {
+  @override
+  List<Food> build() {
+    return [];
+  }
 
   void searchFood(String query) {
     if (query.isEmpty) {
       state = [];
       return;
     } else {
-      state = foodDatabase
-          .where(
+      final foodDatabase = ref.watch(foodDatabaseProvider);
+      state = foodDatabase.where(
               (food) => food.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
     }
-  }
+  }  
 }

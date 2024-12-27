@@ -57,7 +57,7 @@ class MyDrawer extends ConsumerWidget {
                   Navigator.pushNamed(context, '/favorite');
                 },
                 icon: Icons.favorite_rounded,
-                itemCount: '${ref.watch(favoriteFoodProvider).length}',
+                itemCount: '${ref.watch(favoriteFoodNotifierProvider).length}',
               ),
               DrawerTile(
                 title: 'Track Order',
@@ -74,7 +74,7 @@ class MyDrawer extends ConsumerWidget {
                   Navigator.pushNamed(context, '/order_history');
                 },
                 icon: Icons.receipt_long_rounded,
-                itemCount: '${ref.watch(orderHistoryProvider).length}',
+                itemCount: '${ref.watch(orderHistoryNotifierProvider).length}',
               ),
               DrawerTile(
                 title: 'Settings',

@@ -8,7 +8,7 @@ class TrackOrderScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-        body: ref.watch(trackOrderProvider)
+        body: ref.watch(trackOrderNotifierProvider)
             ? const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

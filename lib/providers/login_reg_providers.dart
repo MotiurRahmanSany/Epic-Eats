@@ -1,14 +1,32 @@
 import 'package:epic_eats/screens/login_screen.dart';
 import 'package:epic_eats/screens/register_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final screensIndexProvider = StateProvider<int>((ref) => 0);
+part 'login_reg_providers.g.dart';
 
-final hasJustRegisteredProvider = StateProvider<bool>((ref) => false);
+@riverpod
+class ScreenIndex extends _$ScreenIndex {
+  @override
+  int build() => 0;
 
-final screensProvider = Provider((ref) {
-  return [
-    LoginScreen(),
-    RegisterScreen(),
-  ];
-});
+  void setIndex(int index) {
+    state = index;
+  }
+} 
+
+@riverpod
+class HasJustRegistered extends _$HasJustRegistered {
+  @override
+  bool build() => false;
+
+  void setHasJustRegistered(bool value) {
+    state = value;
+  }
+}
+
+@riverpod 
+List<ConsumerWidget> screens(Ref ref) => [
+      LoginScreen(),
+      RegisterScreen(),
+    ];

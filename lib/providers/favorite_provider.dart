@@ -1,29 +1,31 @@
 import 'package:collection/collection.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../core/constants/hive_constants.dart';
 import '../models/food.dart';
 
-final favoriteFoodProvider =
-    StateNotifierProvider<FavoriteNotifier, List<Food>>((ref) {
-  return FavoriteNotifier();
-});
+part 'favorite_provider.g.dart';
 
-class FavoriteNotifier extends StateNotifier<List<Food>> {
-  FavoriteNotifier() : super([]){
+
+@riverpod
+class FavoriteFoodNotifier extends _$FavoriteFoodNotifier {
+
+  @override
+  List<Food> build() {
     _loadFavoritesFromDB();
+    return [];
   }
 
   void toggleFavorite(Food food) {
     final existingFood = state.firstWhereOrNull((fav) => fav.name == food.name);
-  if (existingFood != null) {
-    state = state.where((fav) => fav.name != food.name).toList();
-    _removeFavoriteFromDB(food.name);
-  } else {
+    if (existingFood != null) {
+      state = state.where((fav) => fav.name != food.name).toList();
+      _removeFavoriteFromDB(food.name);
+    } else {
       state = [...state, food];
       _saveFavoriteToDB(food);
-    } 
+    }
   }
 
   bool isFavorite(food) {

@@ -71,7 +71,7 @@ class LoginScreen extends ConsumerWidget {
                 const Text('Don\'t have an account?'),
                 TextButton(
                   onPressed: () =>
-                      ref.read(screensIndexProvider.notifier).state = 1,
+                      ref.read(screenIndexProvider.notifier).setIndex(1),
                   child: const Text('Register Now'),
                 )
               ],

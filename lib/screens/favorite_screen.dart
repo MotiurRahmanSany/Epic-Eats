@@ -8,7 +8,7 @@ class FavoriteScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final favoriteFoods = ref.watch(favoriteFoodProvider);
+    final favoriteFoods = ref.watch(favoriteFoodNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorite Foods'),
@@ -24,7 +24,7 @@ class FavoriteScreen extends ConsumerWidget {
           ),
         ),
       ),
-      body: ref.watch(favoriteFoodProvider).isEmpty
+      body: ref.watch(favoriteFoodNotifierProvider).isEmpty
           ? const Center(
               child: Text('No Favorites Yet'),
             )
@@ -36,7 +36,7 @@ class FavoriteScreen extends ConsumerWidget {
                   food: food,
                   onTap: () {
                     ref
-                        .read(favoriteFoodProvider.notifier)
+                        .read(favoriteFoodNotifierProvider.notifier)
                         .toggleFavorite(food);
                   },
                 );

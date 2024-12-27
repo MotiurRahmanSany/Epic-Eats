@@ -51,10 +51,10 @@ class CartItemTile extends ConsumerWidget {
                   const SizedBox(height: 3),
                   CartItemQuantitySelector(
                     decrement: () => ref
-                        .read(cartStateProvider.notifier)
+                        .read(cartNotifierProvider.notifier)
                         .removeFromCart(cartItem),
                     increment: () => ref
-                        .read(cartStateProvider.notifier)
+                        .read(cartNotifierProvider.notifier)
                         .addToCart(cartItem),
                     quantity: cartItem.quantity,
                   ),

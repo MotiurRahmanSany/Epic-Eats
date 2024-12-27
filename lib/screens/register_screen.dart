@@ -60,8 +60,8 @@ class RegisterScreen extends ConsumerWidget {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      ref.read(hasJustRegisteredProvider.notifier).state = true;
-      ref.read(screensIndexProvider.notifier).state = 0;
+      ref.read(hasJustRegisteredProvider.notifier).setHasJustRegistered(true);
+      ref.read(screenIndexProvider.notifier).setIndex(0);
       emailController.clear();
       passwordController.clear();
       confirmPasswordController.clear();
@@ -116,7 +116,7 @@ class RegisterScreen extends ConsumerWidget {
                 const Text('Already have an account?'),
                 TextButton(
                   onPressed: () =>
-                      ref.read(screensIndexProvider.notifier).state = 0,
+                      ref.read(screenIndexProvider.notifier).setIndex(0),
                   child: const Text('Login'),
                 ),
               ],

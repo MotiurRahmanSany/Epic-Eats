@@ -24,7 +24,7 @@ class CartScreen extends ConsumerWidget {
           ),
           TextButton(
             onPressed: () {
-              ref.read(cartStateProvider.notifier).clearCart();
+              ref.read(cartNotifierProvider.notifier).clearCart();
               Navigator.of(context).pop();
             },
             child: const Text('Yes'),
@@ -52,20 +52,20 @@ class CartScreen extends ConsumerWidget {
             IconButton(
               icon: const Icon(Icons.delete_outlined),
               onPressed: () {
-                if (ref.read(cartStateProvider).isEmpty) return;
+                if (ref.read(cartNotifierProvider).isEmpty) return;
                 clearTheCart(context, ref);
               },
             ),
           ]),
-      body: ref.watch(cartStateProvider).isEmpty
+      body: ref.watch(cartNotifierProvider).isEmpty
           ? const EmptyCart()
           : Column(
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: ref.watch(cartStateProvider).length,
+                    itemCount: ref.watch(cartNotifierProvider).length,
                     itemBuilder: (context, index) {
-                      final cartItem = ref.watch(cartStateProvider)[index];
+                      final cartItem = ref.watch(cartNotifierProvider)[index];
                       return CartItemTile(cartItem: cartItem);
                     },
                   ),

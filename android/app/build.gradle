@@ -10,7 +10,8 @@ plugins {
 
 android {
     namespace = "com.example.epic_eats"
-    compileSdk = flutter.compileSdkVersion
+    // compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

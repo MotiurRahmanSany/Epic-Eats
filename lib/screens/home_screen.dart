@@ -48,7 +48,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     ref.read(selectedTabProvider.notifier).state = index;
                   },
                   tabController: _tabController,
-                  cartLength: ref.watch(cartStateProvider).length,
+                  cartLength: ref.watch(cartNotifierProvider).length,
                 ),
               ];
             },

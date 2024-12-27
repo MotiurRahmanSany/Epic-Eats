@@ -3,7 +3,7 @@ import 'package:epic_eats/models/cart_item.dart';
 import 'package:epic_eats/models/food.dart';
 import 'package:epic_eats/models/order.dart';
 import 'package:epic_eats/providers/login_reg_providers.dart';
-import 'package:epic_eats/providers/theme_provider.dart';
+import 'package:epic_eats/config/themes/theme_provider.dart';
 import 'package:epic_eats/screens/cart_screen.dart';
 import 'package:epic_eats/screens/checkout_screen.dart';
 import 'package:epic_eats/screens/favorite_screen.dart';
@@ -61,7 +61,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeProvider);
+    final theme = ref.watch(themeNotifierProvider);
     final hasJustRegistered = ref.watch(hasJustRegisteredProvider);
 
     return MaterialApp(

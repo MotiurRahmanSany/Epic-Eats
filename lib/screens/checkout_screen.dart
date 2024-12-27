@@ -35,14 +35,14 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
               onConfirm: () {
                 Navigator.of(context).pop();
                 //! setting track order to true
-                ref.read(trackOrderProvider.notifier).state = true;
+                ref.read(trackOrderNotifierProvider.notifier).setIsTracking(true);
 
-                ref.read(orderHistoryProvider.notifier).createOrder(
-                    items: ref.read(cartStateProvider),
-                    totalAmount: ref.read(cartStateProvider.notifier).totalPrice,
-                    userLocation: ref.read(locationProvider),
+                ref.read(orderHistoryNotifierProvider.notifier).createOrder(
+                    items: ref.read(cartNotifierProvider),
+                    totalAmount: ref.read(cartNotifierProvider.notifier).totalPrice,
+                    userLocation: ref.read(locationNotifierProvider),
                     );
-                ref.read(cartStateProvider.notifier).clearCart();
+                ref.read(cartNotifierProvider.notifier).clearCart();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -55,10 +55,10 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
               cardHolderName: cardHolderName,
               cvvCode: cvvCode,
               totalAmount: ref
-                  .watch(cartStateProvider.notifier)
+                  .watch(cartNotifierProvider.notifier)
                   .totalPrice
                   .toStringAsFixed(2),
-              userLocation: ref.watch(locationProvider),
+              userLocation: ref.watch(locationNotifierProvider),
             );
           });
     }
@@ -66,7 +66,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final payableAmount = ref.watch(cartStateProvider.notifier).totalPrice;
+    final payableAmount = ref.watch(cartNotifierProvider.notifier).totalPrice;
 
     return Scaffold(
       appBar: AppBar(

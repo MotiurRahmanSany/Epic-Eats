@@ -24,8 +24,8 @@ class FoodDetailsScreen extends ConsumerStatefulWidget {
 class _FoodDetailsScreenState extends ConsumerState<FoodDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    final selectedAddons = ref.watch(addonState);
-    final favoriteFoods = ref.watch(favoriteFoodProvider);
+    final selectedAddons = ref.watch(addonNotifierProvider);
+    final favoriteFoods = ref.watch(favoriteFoodNotifierProvider);
 
     return Stack(
       children: [
@@ -107,7 +107,7 @@ class _FoodDetailsScreenState extends ConsumerState<FoodDetailsScreen> {
                                 ),
                                 onChanged: (value) {
                                   ref
-                                      .read(addonState.notifier)
+                                      .read(addonNotifierProvider.notifier)
                                       .toggleAddon(addonItem);
                                 },
                               );
@@ -118,13 +118,13 @@ class _FoodDetailsScreenState extends ConsumerState<FoodDetailsScreen> {
                         MyButton(
                           onTap: () {
                             // Add to cart
-                            ref.read(cartStateProvider.notifier).addToCart(
+                            ref.read(cartNotifierProvider.notifier).addToCart(
                                   CartItem(
                                     food: widget.food,
                                     selectedAddons: selectedAddons,
                                   ),
                                 );
-                            ref.read(addonState.notifier).clearAddons();
+                            ref.read(addonNotifierProvider.notifier).clearAddons();
 
                             Navigator.of(context).pop();
                             ScaffoldMessenger.of(context).clearSnackBars();
@@ -160,7 +160,7 @@ class _FoodDetailsScreenState extends ConsumerState<FoodDetailsScreen> {
             child: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_outlined),
               onPressed: () {
-                ref.read(addonState.notifier).clearAddons();
+                ref.read(addonNotifierProvider.notifier).clearAddons();
                 Navigator.pop(context);
               },
             ),
@@ -187,7 +187,7 @@ class _FoodDetailsScreenState extends ConsumerState<FoodDetailsScreen> {
                 ),
                 onPressed: () {
                   ref
-                      .read(favoriteFoodProvider.notifier)
+                      .read(favoriteFoodNotifierProvider.notifier)
                       .toggleFavorite(widget.food);
                 },
               ),

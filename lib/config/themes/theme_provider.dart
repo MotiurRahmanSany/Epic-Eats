@@ -1,18 +1,20 @@
 import 'package:epic_eats/core/constants/hive_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../themes/dark_theme.dart';
-import '../themes/light_theme.dart';
+import 'dark_theme.dart';
+import 'light_theme.dart';
 
-final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeData>(
-  (ref) => ThemeNotifier(),
-);
+part 'theme_provider.g.dart';
 
-class ThemeNotifier extends StateNotifier<ThemeData> {
-  ThemeNotifier() : super(lightTheme) {
+@riverpod
+class ThemeNotifier extends _$ThemeNotifier {
+
+  @override
+  ThemeData build() {
     _loadThemeFromDB();
+    return lightTheme;
   }
 
   void toggleTheme() {
