@@ -27,7 +27,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     _tabController = TabController(length: categoryLength, vsync: this);
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) {
-        ref.read(selectedTabProvider.notifier).state = _tabController.index;
+        ref.read(selectedTabProvider.notifier).setIndex(_tabController.index);
       }
     });
   }
@@ -42,10 +42,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
           drawer: const MyDrawer(),
           body: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [    
+              return [
                 MySliverAppBar(
                   onTabChange: (index) {
-                    ref.read(selectedTabProvider.notifier).state = index;
+                    ref.read(selectedTabProvider.notifier).setIndex(index);
                   },
                   tabController: _tabController,
                   cartLength: ref.watch(cartNotifierProvider).length,
@@ -62,8 +62,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           ref.watch(filteredFoodProvider(category));
                       if (foodList.isEmpty) {
                         return const Center(
-                          child:
-                              Text('No Items available in this category'),
+                          child: Text('No Items available in this category'),
                         );
                       }
                       return ListView.builder(
