@@ -1,0 +1,54 @@
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Flutter environment
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      # Step 3: Cache Flutter dependencies to speed up future builds
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pub-cache
+            ~/flutter/bin/cache
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      # Step 4: Install dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Step 5: Run tests
+      - name: Run Flutter tests
+        run: flutter test
+
+      # Step 6: Build the Flutter app
+      - name: Build Flutter app
+        run: flutter build apk --release
+
+      # Optional: Deploy to Firebase (or another platform)
+      # If you're deploying, you could add a deployment step here.
+      # Example using Firebase:
+      # - name: Deploy to Firebase
+      #   run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+
